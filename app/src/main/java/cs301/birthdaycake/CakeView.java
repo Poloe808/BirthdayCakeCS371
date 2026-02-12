@@ -1,5 +1,7 @@
 package cs301.birthdaycake;
 
+import static android.graphics.Color.GREEN;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,6 +19,9 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint markerPaint = new Paint();
+
+
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -67,7 +72,21 @@ public class CakeView extends SurfaceView {
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
+        //circleColor.setColor(GREEN);
+        markerPaint.setColor(Color.RED);
+        markerPaint.setStrokeWidth(8);
+
     }
+
+    //public void drawCircleX(float initx){
+    //float y = 0;
+        //float x = initx;
+    //}
+
+    //public void drawCircleY(float inity){
+        //float x = 0;
+       // float y = inity;
+    //}
 
     /**
      * draws a candle at a specified position.  Important:  the left, bottom coordinates specify
@@ -134,6 +153,14 @@ public class CakeView extends SurfaceView {
         {
             drawCandle(canvas, cakeLeft + i*250, cakeTop);
         }
+
+        if(model.isTouch){
+
+            canvas.drawLine(model.touchX, 0, model.touchX, 80, markerPaint);
+
+            canvas.drawLine(0, model.touchY, 80, model.touchY, markerPaint);
+        }
+
 
     }//onDraw
 
