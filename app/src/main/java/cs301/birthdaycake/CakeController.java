@@ -16,7 +16,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     private CakeView cakeView;
     private CakeModel cakeModel;
 
-    CakeController(CakeView cakeview){
+    CakeController(CakeView cakeview) {
         this.cakeView = cakeview;
         cakeModel = cakeview.getCakeModel();
 
@@ -24,7 +24,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     }
 
     @Override
-    public void onClick (View v) {
+    public void onClick(View v) {
         cakeModel.isLit = false;
         cakeView.invalidate();
     }
@@ -60,11 +60,11 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         cakeModel.hasBalloon = true;
         cakeModel.x = motionEvent.getX();
         cakeModel.y = motionEvent.getY();
-        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE){
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
             cakeModel.touchX = motionEvent.getX();
             cakeModel.touchY = motionEvent.getY();
             cakeModel.isTouch = true;
-            }
+        }
         cakeView.invalidate();
         return true;
     }
