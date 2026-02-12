@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
-import android.view.View;
 
 public class CakeView extends SurfaceView {
 
@@ -17,6 +16,8 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    //New paint and it's RED BB
+    Paint red = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -45,6 +46,10 @@ public class CakeView extends SurfaceView {
     public CakeView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
+
+        //text big now :)
+        red.setTextSize(80);
+        red.setColor(0xFFFF0000);
 
         model = new CakeModel();
 
@@ -135,10 +140,17 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + i*250, cakeTop);
         }
 
+        drawText(canvas);
+
     }//onDraw
 
     //getter method for cakeModel object
-    public CakeModel getCakeView(){return model;}
+    public CakeModel getCakeModel(){return model;}
+
+    //Big red text that says "coordinates" then the coordinates of whatever gets touched :)
+    public void drawText(Canvas canvas){
+        canvas.drawText("Touch Coordinate: " + model.touchX + ", " + model.touchY, 100.0f, 1000.0f, red);
+    }
 
 }//class CakeView
 

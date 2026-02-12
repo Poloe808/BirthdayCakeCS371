@@ -7,4 +7,6 @@ public class CakeModel {
     public boolean hasFrosting = true;
     public boolean hasCandles = true;
 
+    public int touchX = 100;
+    public int touchY = 1000;
 }
