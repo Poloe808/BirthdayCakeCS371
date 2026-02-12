@@ -1,5 +1,6 @@
 package cs301.birthdaycake;
 
+import android.view.MotionEvent;
 import static android.view.MotionEvent.ACTION_DOWN;
 
 import android.util.Log;
@@ -17,7 +18,9 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     CakeController(CakeView cakeview){
         this.cakeView = cakeview;
-        cakeModel = cakeview.getCakeView();
+        cakeModel = cakeview.getCakeModel();
+
+        //should be in mainActivity
     }
 
     @Override
@@ -48,13 +51,15 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     }
 
-
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-            cakeModel.hasBalloon = true;
-            cakeModel.x = motionEvent.getX();
-            cakeModel.y = motionEvent.getY();
-            cakeView.invalidate();
-            return true;
+        cakeModel.x = (int) motionEvent.getX();
+        cakeModel.y = (int) motionEvent.getY();
+
+        cakeModel.hasBalloon = true;
+        cakeModel.x = motionEvent.getX();
+        cakeModel.y = motionEvent.getY();
+        cakeView.invalidate();
+        return true;
     }
 }

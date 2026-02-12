@@ -10,4 +10,6 @@ public class CakeModel {
     public float x=100;
     public float y=100;
 
+    public int touchX = 100;
+    public int touchY = 1000;
 }
