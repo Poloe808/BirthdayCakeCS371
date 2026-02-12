@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
@@ -22,6 +23,10 @@ public class CakeView extends SurfaceView {
     Paint markerPaint = new Paint();
 
 
+    Paint balloonPaint = new Paint();
+    Paint balloonStringPaint = new Paint();
+    //New paint and it's RED BB
+    Paint red = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -51,6 +56,10 @@ public class CakeView extends SurfaceView {
 
         super(context, attrs);
 
+        //text big now :)
+        red.setTextSize(80);
+        red.setColor(0xFFFF0000);
+
         model = new CakeModel();
 
         //This is essential or your onDraw method won't get called
@@ -69,6 +78,10 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+        balloonStringPaint.setColor(Color.RED);
+        balloonStringPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -77,16 +90,6 @@ public class CakeView extends SurfaceView {
         markerPaint.setStrokeWidth(8);
 
     }
-
-    //public void drawCircleX(float initx){
-    //float y = 0;
-        //float x = initx;
-    //}
-
-    //public void drawCircleY(float inity){
-        //float x = 0;
-       // float y = inity;
-    //}
 
     /**
      * draws a candle at a specified position.  Important:  the left, bottom coordinates specify
@@ -154,6 +157,9 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + i*250, cakeTop);
         }
 
+        drawBalloon(canvas);
+        drawText(canvas);
+
         if(model.isTouch){
 
             canvas.drawLine(model.touchX, 0, model.touchX, 80, markerPaint);
@@ -164,8 +170,20 @@ public class CakeView extends SurfaceView {
 
     }//onDraw
 
+    public void drawBalloon(Canvas canvas) {
+        if(model.hasBalloon) {
+            canvas.drawRect(model.x, model.y, model.x+15,model.y+200, balloonStringPaint);
+            canvas.drawCircle(model.x, model.y, 100.0f, balloonPaint);
+        }
+    }
+
     //getter method for cakeModel object
-    public CakeModel getCakeView(){return model;}
+    public CakeModel getCakeModel(){return model;}
+
+    //Big red text that says "coordinates" then the coordinates of whatever gets touched :)
+    public void drawText(Canvas canvas){
+        canvas.drawText("Touch Coordinate: " + model.x + ", " + model.y, 100.0f, 1000.0f, red);
+    }
 
 }//class CakeView
 
